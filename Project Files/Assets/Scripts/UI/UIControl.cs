@@ -23,8 +23,11 @@ public class UIControl : MonoBehaviour
     [Space(2)]
 
     [SerializeField] private GameObject _continueButton;
+    [Space(5)] 
+    
+    [SerializeField] private AudioSource _source;
     [Space(5)]
-
+    
     [Header("Pause Music Control")]
     [SerializeField] private AudioMixer _default;
 
@@ -101,7 +104,8 @@ public class UIControl : MonoBehaviour
     public void OpenPause()
     {
         if (GameManager.Instance.TimeSlowed) return;
-        
+
+        _source.Play();
         MuteSound();
 
         GameManager.Instance.PauseTime();

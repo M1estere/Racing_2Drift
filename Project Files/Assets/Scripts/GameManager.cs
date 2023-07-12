@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector] public bool GameStarted = false;
     
+    [HideInInspector] public bool CanSlow = false;
+    
     private Vignette _vignette;
 
     private int _carPosition;
@@ -92,13 +94,10 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(_keyCode) && _carUpdate.ReturnStamina() > 0 && !GamePaused && !Finish && GameStarted) // slow time
-        {
-            DoSlowMotion();
-        } else if (!GamePaused && !Finish && GameStarted)
-        {
-            BreakSlowMotion();
-        }
+        // CanSlow = Input.GetKey(_keyCode);
+
+        if (CanSlow == true) DoSlowMotion();
+        else BreakSlowMotion();
     }
 
     private void FinishLevel()
@@ -108,6 +107,12 @@ public class GameManager : MonoBehaviour
 
     private void DoSlowMotion()
     {
+        if (_carUpdate.ReturnStamina() <= 0 || GamePaused || Finish || GameStarted == false)
+        {
+            BreakSlowMotion();
+            return;
+        }
+            
         TimeSlowed = true;
 
         Time.timeScale = _slowDownFactor;
@@ -122,6 +127,8 @@ public class GameManager : MonoBehaviour
 
     private void BreakSlowMotion()
     {
+        if (GamePaused || Finish || GameStarted == false) return;
+        
         TimeSlowed = false;
 
         Time.timeScale = 1;

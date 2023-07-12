@@ -20,6 +20,9 @@ public class LevelScreenShow : MonoBehaviour
     [Space(5)]
 
     [SerializeField] private InputHandler _handler;
+    [Space(5)]
+
+    [SerializeField] private GameObject _mobileUI;
 
     private Camera _cameraMain;
 
@@ -44,6 +47,8 @@ public class LevelScreenShow : MonoBehaviour
             _handler.enabled = false;
 
             _follow.enabled = false;
+
+            _mobileUI.SetActive(false);
 
             i++;
 
@@ -85,5 +90,7 @@ public class LevelScreenShow : MonoBehaviour
         _follow.enabled = true;
 
         _handler.enabled = true;
+
+        _mobileUI.SetActive(true);
     }
 }

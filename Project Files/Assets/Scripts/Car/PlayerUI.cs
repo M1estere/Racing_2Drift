@@ -44,6 +44,8 @@ public class PlayerUI : MonoBehaviour
 
     private void SetStaminaAmount(float amount)
     {
+        if (amount < 0) amount = 0;
+        
         float scale = _staminaBarFill.localScale.x;
 
         if (scale > amount)

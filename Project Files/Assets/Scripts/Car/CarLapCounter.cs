@@ -74,6 +74,12 @@ public class CarLapCounter : MonoBehaviour
 
                 if (_lapsCompleted >= _lapsToComplete)
                     _raceCompleted = true;
+
+                if (gameObject.CompareTag("Player"))
+                {
+                    // restore some stamina
+                    GetComponent<CarUpdate>().IncreaseStamina(33);
+                }
             }
 
             OnPassCheckpoint?.Invoke(this);
